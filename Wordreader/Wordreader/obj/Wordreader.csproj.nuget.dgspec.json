@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Dev\\Systemy\\KotkiPsotki\\Wordreader\\Wordreader\\Wordreader.csproj": {}
+  },
+  "projects": {
+    "D:\\Dev\\Systemy\\KotkiPsotki\\Wordreader\\Wordreader\\Wordreader.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Dev\\Systemy\\KotkiPsotki\\Wordreader\\Wordreader\\Wordreader.csproj",
+        "projectName": "Wordreader",
+        "projectPath": "D:\\Dev\\Systemy\\KotkiPsotki\\Wordreader\\Wordreader\\Wordreader.csproj",
+        "packagesPath": "C:\\Users\\Wiktor Kopiński\\.nuget\\packages\\",
+        "outputPath": "D:\\Dev\\Systemy\\KotkiPsotki\\Wordreader\\Wordreader\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Wiktor Kopiński\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\GitHub": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\Wiktor Kopiński\\Downloads": {},
+          "https://www.nuget.org/api/v2/": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
