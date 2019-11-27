@@ -10,7 +10,7 @@ namespace KotkiPsotki
     {
         static void Main(string[] args)
         {
-//initial code
+//initial code to commit
         }
     }
 }
