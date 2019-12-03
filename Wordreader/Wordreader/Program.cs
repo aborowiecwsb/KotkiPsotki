@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.IO;
+
+
 
 namespace Wordreader
 {
@@ -19,6 +23,22 @@ namespace Wordreader
                 int menuOption = Convert.ToInt32(Console.ReadLine());
                 if (menuOption == 8)
                     break;
+                if (menuOption == 1)
+                {
+                    Console.WriteLine("Pobieranie pliku.");
+                    WebClient DownloadFile = new WebClient();
+
+                    try
+                    {
+                        DownloadFile.DownloadFile("https://s3.zylowski.net/public/input/X.txt", Path.Combine(Environment.CurrentDirectory, "X.txt"));
+
+                        Console.WriteLine("Plik został pobrany pomyślnie");
+                    }
+                    catch (WebException e)
+                    {
+                        Console.WriteLine("Błąd pobierania. Sprawdź połączenie z internetem.");
+                    }
+                }
             }
         }
     }
