@@ -49,12 +49,19 @@ namespace Wordreader
                 {
                     string path = Path.Combine(Environment.CurrentDirectory, "X.txt");
                     Console.WriteLine("Liczenie liter występujących w pliku tekstowym.");
+                    if (File.Exists(path) == true)
+                    {
+                        string text = File.ReadAllText(path, Encoding.UTF8);
+                        int count = text.Count(char.IsLetter);
+                        Console.WriteLine("Ilość liter występująca w tekście: " + count);
+                        Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
 
-                    string text = File.ReadAllText(path, Encoding.UTF8);
-                    int count = text.Count(char.IsLetter);
-                    Console.WriteLine("Ilość liter występująca w tekście: " + count);
-                    Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
-                    Console.ReadLine();
+                    }
                 }
             }
         }
