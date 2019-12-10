@@ -72,6 +72,28 @@ namespace Wordreader
 
                     }
                 }
+                //Opcja liczenia ilości wyrazów w pobranym pliku
+                if (menuOption == 3)
+                {
+
+                    string words = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+                    if (File.Exists(words) == true)
+                    {
+                        char[] separators = { ' ', ',', '.', ':', ';', '?', '!', '-', '=', '+', '-', '*', '/' };
+
+
+                        int wordsCount = words.Split(separators, StringSplitOptions.RemoveEmptyEntries).Length;
+
+                        Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordsCount);
+                        Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
+
+                    }
+                }
             }
         }
     }
