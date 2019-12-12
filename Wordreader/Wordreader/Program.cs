@@ -94,7 +94,28 @@ namespace Wordreader
 
                     }
                 }
+                    //Opcja liczenia ilości znaków interpunkcyjnych w pobranym pliku
+                    if (menuOption == 4)
+                    {
+
+                        string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+                        if (File.Exists(punctuation) == true)
+                        {
+                            string text = File.ReadAllText(punctuation, Encoding.UTF8);
+                            int punctuationCount = text.Count(predicate: char.IsPunctuation);
+
+                            Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
+                            Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("File does not exist.");
+
+                        }
+                    }
+                }
             }
         }
     }
-}
+
