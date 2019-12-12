@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.IO;
-using System.Text;
 using System.Linq;
+using System.Net;
+using System.Text;
 
 
 
@@ -94,28 +94,48 @@ namespace Wordreader
 
                     }
                 }
-                    //Opcja liczenia ilości znaków interpunkcyjnych w pobranym pliku
-                    if (menuOption == 4)
+                //Opcja liczenia ilości znaków interpunkcyjnych w pobranym pliku
+                if (menuOption == 4)
+                {
+
+                    string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+                    if (File.Exists(punctuation) == true)
+                    {
+                        string text = File.ReadAllText(punctuation, Encoding.UTF8);
+                        int punctuationCount = text.Count(predicate: char.IsPunctuation);
+
+                        Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
+                        Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
+
+                    }
+                }
+                //Opcja liczania ilości zdań w pobranym pliku
+                if (menuOption == 5)
+                {
+
+                    string sentence = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+                    if (File.Exists(sentence) == true)
                     {
 
-                        string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
-                        if (File.Exists(punctuation) == true)
-                        {
-                            string text = File.ReadAllText(punctuation, Encoding.UTF8);
-                            int punctuationCount = text.Count(predicate: char.IsPunctuation);
+                        var sentenceCount = sentence.Split(new char[] { ',', '.', '?', '!', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                        var count = sentence.Length;
+                        Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
+                        Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
 
-                            Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
-                            Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
-                            Console.ReadLine();
-                        }
-                        else
-                        {
-                            Console.WriteLine("File does not exist.");
-
-                        }
                     }
                 }
             }
         }
+    }
     }
 
