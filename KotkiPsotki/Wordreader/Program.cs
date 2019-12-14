@@ -188,7 +188,7 @@ namespace Wordreader
                 Console.WriteLine("8. Wyjście z programu.");
                 int menuOption = Convert.ToInt32(Console.ReadLine());
 
-                //Opcja wyjścia z programu
+                //Opcja wyjścia z aplikacji
 
                 switch (menuOption)
                 {
