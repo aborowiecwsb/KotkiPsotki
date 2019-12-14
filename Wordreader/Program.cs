@@ -12,7 +12,7 @@ namespace Wordreader
     {
         static void Main(string[] args)
         {
-             var standardOutput = Console.Out;
+            var standardOutput = Console.Out;
 
             // case 1
             void downloadFileOption()
@@ -22,7 +22,7 @@ namespace Wordreader
 
                 try
                 {
-                    DownloadFile.DownloadFile("https://tinyurl.com/rugx6sb", Path.Combine(Environment.CurrentDirectory, "X.txt"));
+                    DownloadFile.DownloadFile("https://s3.zylowski.net/public/input/1.txt", Path.Combine(Environment.CurrentDirectory, "X.txt"));
 
                     Console.WriteLine("Plik został pobrany pomyślnie");
                 }
@@ -43,6 +43,8 @@ namespace Wordreader
                     string text = File.ReadAllText(path, Encoding.UTF8);
                     int count = text.Count(char.IsLetter);
                     Console.WriteLine("Ilość liter występująca w tekście: " + count);
+                    Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                    Console.ReadLine();
                     return count;
                 }
                 else
@@ -64,6 +66,7 @@ namespace Wordreader
                     Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordCount.Length);
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
+                    return wordCount.Length;
                 }
                 {
                     Console.WriteLine("Plik nie istnieje.");
@@ -79,9 +82,9 @@ namespace Wordreader
                     string text = File.ReadAllText(punctuation, Encoding.UTF8);
                     int punctuationCount = text.Count(predicate: char.IsPunctuation);
                     Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
-                    return punctuationCount;
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
+                    return punctuationCount;
                 }
                 else
                 {
@@ -99,9 +102,9 @@ namespace Wordreader
                     var sentenceCount = sentence.Split(new char[] { ',', '.', '?', '!', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
                     var count = sentence.Length;
                     Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
-                    return count;
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
+                    return count;
                 }
                 else
                 {
@@ -155,18 +158,20 @@ namespace Wordreader
                 string statistic = Path.Combine(Environment.CurrentDirectory, "statystyki.txt");
                 System.IO.File.Delete(fileInFolder);
                 System.IO.File.Delete(statistic);
-                
+
             }
             //case 7
             void saveAllData(int letterCount, int wordsCount, int punctuationsCount, int sentecesCount)
             {
-                var filestream = new FileStream("statystyki.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+                var filestream = new FileStream("statystyki.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                 StreamWriter sw = new StreamWriter(filestream);
-                sw.WriteLine("liczba liter: " + letterCount);
-                sw.WriteLine("liczba slow: " + wordsCount);
-                sw.WriteLine("liczba znakow interpunkcyjnych: " + punctuationsCount);
-                sw.WriteLine("liczba zdan: " + sentecesCount);
+                sw.WriteLine("Liczba liter: " + letterCount.ToString());
+                sw.WriteLine("Liczba slow: " + wordsCount.ToString());
+                sw.WriteLine("Liczba znakow interpunkcyjnych: " + punctuationsCount.ToString());
+                sw.WriteLine("Liczba zdan: " + sentecesCount.ToString());
                 sw.Close();
+                Console.WriteLine("Stworzono plik statystyki.txt. Wprowadź dowolny klawisz, aby kontynuować.");
+                Console.ReadLine();
             }
 
             int continueProgram = 1;
@@ -224,4 +229,3 @@ namespace Wordreader
         }
     }
 }
-
