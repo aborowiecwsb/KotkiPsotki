@@ -165,11 +165,13 @@ namespace Wordreader
             {
                 var filestream = new FileStream("statystyki.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                 StreamWriter sw = new StreamWriter(filestream);
-                sw.WriteLine("liczba liter: " + letterCount.ToString());
-                sw.WriteLine("liczba slow: " + wordsCount.ToString());
-                sw.WriteLine("liczba znakow interpunkcyjnych: " + punctuationsCount.ToString());
-                sw.WriteLine("liczba zdan: " + sentecesCount.ToString());
+                sw.WriteLine("Liczba liter: " + letterCount.ToString());
+                sw.WriteLine("Liczba slow: " + wordsCount.ToString());
+                sw.WriteLine("Liczba znakow interpunkcyjnych: " + punctuationsCount.ToString());
+                sw.WriteLine("Liczba zdan: " + sentecesCount.ToString());
                 sw.Close();
+                Console.WriteLine("Stworzono plik statystyki.txt. Wprowadź dowolny klawisz, aby kontynuować.");
+                Console.ReadLine();
             }
 
             int continueProgram = 1;
