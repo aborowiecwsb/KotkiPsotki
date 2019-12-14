@@ -1,8 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Net;
 using System.IO;
 using System.Text;
@@ -32,6 +28,7 @@ namespace Wordreader
                 int menuOption = Convert.ToInt32(Console.ReadLine());
 
                 //Opcja wyjścia z aplikacji
+
                 if (menuOption == 8)
                     break;
 
@@ -44,8 +41,6 @@ namespace Wordreader
 
                     try
                     {
-
-
                         DownloadFile.DownloadFile("https://s3.zylowski.net/public/input/1.txt", Path.Combine(Environment.CurrentDirectory, "X.txt"));
 
                         Console.WriteLine("Plik został pobrany pomyślnie");
@@ -72,7 +67,7 @@ namespace Wordreader
                     }
                     else
                     {
-                        Console.WriteLine("File does not exist.");
+                        Console.WriteLine("Plik nie istnieje.");
 
                     }
                 }
@@ -97,7 +92,7 @@ namespace Wordreader
                     }
                     else
                     {
-                        Console.WriteLine("File does not exist.");
+                        Console.WriteLine("Plik nie istnieje.");
 
                     }
                 }
@@ -108,6 +103,7 @@ namespace Wordreader
                 {
 
                     string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+
                     if (File.Exists(punctuation) == true)
                     {
                         string text = File.ReadAllText(punctuation, Encoding.UTF8);
@@ -119,28 +115,31 @@ namespace Wordreader
                     }
                     else
                     {
-                        Console.WriteLine("File does not exist.");
+                        Console.WriteLine("Plik nie istnieje.");
 
                     }
                 }
-                //Opcja liczania ilości zdań w pobranym pliku
+
+                //Opcja liczenia ilości zdań w pobranym pliku
+
                 if (menuOption == 5)
                 {
 
                     string sentence = Path.Combine(Environment.CurrentDirectory, "X.txt.");
+
                     if (File.Exists(sentence) == true)
                     {
 
-                        var sentenceCount = sentence.Split(new char[] { ',', '.', '?', '!', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                        var sentenceCount = sentence.Split(new char[] {'.', '?', '!'}, StringSplitOptions.RemoveEmptyEntries);
                         var count = sentence.Length;
+
                         Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
                         Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                         Console.ReadLine();
                     }
                     else
                     {
-                        Console.WriteLine("File does not exist.");
-
+                        Console.WriteLine("Plik nie istnieje.");
 
                     }
 
@@ -188,5 +187,4 @@ namespace Wordreader
             }
         }
     }
-    }
-
+}
