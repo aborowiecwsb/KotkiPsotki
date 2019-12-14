@@ -3,10 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Linq;
 
 
 
@@ -16,13 +12,7 @@ namespace Wordreader
     {
         static void Main(string[] args)
         {
-            //Opcja zapisywania wyników z pozycji 2-5 do pliku
-
-
-            var standardOutput = Console.Out;
-            //streamwriter.AutoFlush = true;
-            //Menu główne, działające w nieskończonej pętli
-
+             var standardOutput = Console.Out;
 
             // case 1
             void downloadFileOption()
@@ -32,13 +22,11 @@ namespace Wordreader
 
                 try
                 {
-
-
                     DownloadFile.DownloadFile("https://tinyurl.com/rugx6sb", Path.Combine(Environment.CurrentDirectory, "X.txt"));
 
                     Console.WriteLine("Plik został pobrany pomyślnie");
                 }
-                catch (WebException e)
+                catch (WebException)
                 {
                     Console.WriteLine("Błąd pobierania. Sprawdź połączenie z internetem.");
                 }
@@ -54,52 +42,35 @@ namespace Wordreader
                 {
                     string text = File.ReadAllText(path, Encoding.UTF8);
                     int count = text.Count(char.IsLetter);
-                    //using (var streamwriter = new StreamWriter(filestream))
-                    //{
-                    //    Console.SetOut(streamwriter);
-                    ////    Console.WriteLine("Ilość liter występująca w tekście: " + count);
-                    //    Console.SetOut(standardOutput);
-                    //}
                     Console.WriteLine("Ilość liter występująca w tekście: " + count);
                     return count;
-                    //Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
-                    //Console.ReadLine();
                 }
                 else
                 {
-                    Console.WriteLine("File does not exist.");
+                    Console.WriteLine("Plik nie istnieje.");
                     return 0;
                 }
             }
-
+            // case 3
             int wordsCounter()
             {
                 string words = Path.Combine(Environment.CurrentDirectory, "X.txt.");
 
                 if (File.Exists(words) == true)
                 {
-                    char[] separators = { ' ', ',', '.', ':', ';', '?', '!', '-', '=', '+', '-', '*', '/' };
+                    var readFile = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "X.txt."));
+                    var wordCount = readFile.Split(new char[] { ' ', ',', '.', ':', ';', '?', '!', '-', '=', '+', '-', '*', '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-
-                    int wordsCount = words.Split(separators, StringSplitOptions.RemoveEmptyEntries).Length;
-                    //using (var streamwriter = new StreamWriter(filestream))
-                    //{
-                    //    Console.SetOut(streamwriter);
-                    //    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordsCount);
-                    //   Console.SetOut(standardOutput);
-                    //}
-                    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordsCount);
-                    return wordsCount;
+                    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordCount.Length);
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
                 }
-                else
                 {
-                    Console.WriteLine("File does not exist.");
+                    Console.WriteLine("Plik nie istnieje.");
                     return 0;
                 }
             }
-
+            //case 4
             int punctuationsCounter()
             {
                 string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
@@ -107,13 +78,6 @@ namespace Wordreader
                 {
                     string text = File.ReadAllText(punctuation, Encoding.UTF8);
                     int punctuationCount = text.Count(predicate: char.IsPunctuation);
-                    //if (menuOption == 7)
-                    //   using (var streamwriter = new StreamWriter(filestream))
-                    //  {
-                    //      Console.SetOut(streamwriter);
-                    //     Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
-                    //     Console.SetOut(standardOutput);
-                    //  }
                     Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
                     return punctuationCount;
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
@@ -121,11 +85,11 @@ namespace Wordreader
                 }
                 else
                 {
-                    Console.WriteLine("File does not exist.");
+                    Console.WriteLine("Plik nie istnieje.");
                     return 0;
                 }
             }
-
+            //case 5
             int sentecesCounter()
             {
                 string sentence = Path.Combine(Environment.CurrentDirectory, "X.txt.");
@@ -134,12 +98,6 @@ namespace Wordreader
 
                     var sentenceCount = sentence.Split(new char[] { ',', '.', '?', '!', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
                     var count = sentence.Length;
-                    //using (var streamwriter = new StreamWriter(filestream))
-                    //{
-                    //    Console.SetOut(streamwriter);
-                    //    Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
-                    //    Console.SetOut(standardOutput);
-                    //}
                     Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
                     return count;
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
@@ -147,12 +105,12 @@ namespace Wordreader
                 }
                 else
                 {
-                    Console.WriteLine("File does not exist.");
+                    Console.WriteLine("Plik nie istnieje.");
                     return 0;
 
                 }
             }
-
+            //case 6
             void raportGenerate()
             {
                 string path = Path.Combine(Environment.CurrentDirectory, "X.txt");
@@ -190,6 +148,16 @@ namespace Wordreader
                 }
             }
 
+            //case8
+            void deleteAll()
+            {
+                string fileInFolder = Path.Combine(Environment.CurrentDirectory, "X.txt");
+                string statistic = Path.Combine(Environment.CurrentDirectory, "statystyki.txt");
+                System.IO.File.Delete(fileInFolder);
+                System.IO.File.Delete(statistic);
+                
+            }
+            //case 7
             void saveAllData(int letterCount, int wordsCount, int punctuationsCount, int sentecesCount)
             {
                 var filestream = new FileStream("statystyki.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
@@ -247,24 +215,12 @@ namespace Wordreader
                         break;
                     case 8:
                         continueProgram = 0;
+                        deleteAll();
                         break;
                     default:
                         break;
                 }
             }
-            //Opcja pobierania pliku
-
-            //Opcja zliczania liter występujących w pobranym pliku
-
-            //Opcja liczenia ilości wyrazów w pobranym pliku
-
-            //Opcja liczenia ilości znaków interpunkcyjnych w pobranym pliku
-
-            //Opcja liczania ilości zdań w pobranym pliku
-
-            //Generacja raportu o występowaniu każdej z liter
-
-
         }
     }
 }
