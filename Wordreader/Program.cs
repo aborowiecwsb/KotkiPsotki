@@ -118,7 +118,7 @@ namespace Wordreader
                 if (File.Exists(sentence) == true)
                 {
 
-                    var sentenceCount = sentence.Split(new char[] { ',', '.', '?', '!', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    var sentenceCount = sentence.Split(new char[] {'.', '?'}, StringSplitOptions.RemoveEmptyEntries);
                     var count = sentence.Length;
                     Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
