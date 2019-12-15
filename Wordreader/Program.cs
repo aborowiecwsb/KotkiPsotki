@@ -17,18 +17,37 @@ namespace Wordreader
             // case 1
             void downloadFileOption()
             {
-                Console.WriteLine("Pobieranie pliku.");
-                WebClient DownloadFile = new WebClient();
-
-                try
+                Console.WriteLine("Czy pobrać plik wejściowy? [t/n]");
+                string fileDownload = Convert.ToString(Console.ReadLine());
+                if (fileDownload == "t")
                 {
-                    DownloadFile.DownloadFile("https://s3.zylowski.net/public/input/1.txt", Path.Combine(Environment.CurrentDirectory, "X.txt"));
+                    Console.WriteLine("Pobieranie pliku.");
+                    WebClient DownloadFile = new WebClient();
 
-                    Console.WriteLine("Plik został pobrany pomyślnie");
+                    try
+                    {
+                        DownloadFile.DownloadFile("https://s3.zylowski.net/public/input/1.txt", Path.Combine(Environment.CurrentDirectory, "X.txt"));
+
+                        Console.WriteLine("Plik został pobrany pomyślnie");
+                    }
+                    catch (WebException)
+                    {
+                        Console.WriteLine("Błąd pobierania. Sprawdź połączenie z internetem.");
+                    }
                 }
-                catch (WebException)
+                else if (fileDownload == "n")
                 {
-                    Console.WriteLine("Błąd pobierania. Sprawdź połączenie z internetem.");
+                    Console.WriteLine("A więc podaj nazwę pliku, który chcesz otworzyć.");
+                    try
+                    {
+                        string fileName = Convert.ToString(Console.ReadLine());
+                        string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
+                        FileStream fileOpen = File.OpenRead(filePath);
+                    }
+                    catch(Exception)
+                    {
+                        Console.WriteLine("Nie można otworzyć pliku.");
+                    }
                 }
             }
 
