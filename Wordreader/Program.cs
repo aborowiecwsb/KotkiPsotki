@@ -138,30 +138,45 @@ namespace Wordreader
             {
                 string path = Path.Combine(Environment.CurrentDirectory, "X.txt");
 
-                Console.WriteLine("Generacja raportu o występowaniu liter.");
+                Console.WriteLine("Generacja raportu o występowaniu samoglosek i spolglosek.");
 
                 if (File.Exists(path) == true)
                 {
                     string text = File.ReadAllText(path, Encoding.UTF8).ToString();
 
-                    char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
-                    int alphabetLength = alphabet.Length - 1;
+                    //char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
+                    char[] samogloski = "AEIOUYaeiouy".ToCharArray();
+                    char[] spolgloski = "BCDFGHJKLMNPRSTWZbcdfghjklmnprstwz".ToCharArray();
+                    int alphabetLength = samogloski.Length - 1;
+                    int alphabetLength2 = spolgloski.Length - 1;
                     int i = 0;
-
+                    int j = 0;
                     while (i <= alphabetLength)
                     {
                         int letterCount = 0;
                         foreach (char c in text)
                         {
-                            if (c == alphabet[i])
+                            if (c == samogloski[i])
                             {
                                 letterCount++;
                             }
                         }
-                        Console.WriteLine("W tekście litera " + alphabet[i] + " występuje " + letterCount + " razy.");
+                        Console.WriteLine("W tekście spolgoska: " + samogloski[i] + " wystepuje: " + letterCount + " razy.");
                         i++;
                     }
-
+                    while (j <= alphabetLength2)
+                    {
+                        int letterCount2 = 0;
+                        foreach (char c in text)
+                        {
+                            if (c == spolgloski[j])
+                            {
+                                letterCount2++;
+                            }
+                        }
+                        Console.WriteLine("W tekście samogloska: " + spolgloski[j] + " wystepuje: " + letterCount2 + " razy.");
+                        j++;
+                    }
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
                 }
