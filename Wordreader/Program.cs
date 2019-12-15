@@ -79,12 +79,32 @@ namespace Wordreader
                 string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
                 if (File.Exists(punctuation) == true)
                 {
+                    
+                
                     string text = File.ReadAllText(punctuation, Encoding.UTF8);
-                    int punctuationCount = text.Count(predicate: char.IsPunctuation);
-                    Console.WriteLine("Liczba znaków interpunkcyjnych występujących w tekście: " + punctuationCount);
+                    int liczbaKropek = 0;
+                    int liczbaZnakowZapytania = 0;
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        if (text[i] == '.')
+                        {
+                            liczbaKropek++;
+                        }
+                    }
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        if (text[i] == '?')
+                        {
+                            liczbaZnakowZapytania++;
+                        }
+                    }
+                    Console.WriteLine($"Ilosc kropek i znakow zapytania: {liczbaKropek + liczbaZnakowZapytania}");
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
-                    return punctuationCount;
+                    int znakiRazem = liczbaKropek + liczbaZnakowZapytania;
+                    return znakiRazem;
+                    
+                    
                 }
                 else
                 {
@@ -161,13 +181,13 @@ namespace Wordreader
 
             }
             //case 7
-            void saveAllData(int letterCount, int wordsCount, int punctuationsCount, int sentecesCount)
+            void saveAllData(int letterCount, int wordsCount, int sentecesCount, int znakiRazem)
             {
                 var filestream = new FileStream("statystyki.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                 StreamWriter sw = new StreamWriter(filestream);
                 sw.WriteLine("Liczba liter: " + letterCount.ToString());
                 sw.WriteLine("Liczba slow: " + wordsCount.ToString());
-                sw.WriteLine("Liczba znakow interpunkcyjnych: " + punctuationsCount.ToString());
+                sw.WriteLine("Liczba kropek: " + znakiRazem.ToString());
                 sw.WriteLine("Liczba zdan: " + sentecesCount.ToString());
                 sw.Close();
                 Console.WriteLine("Stworzono plik statystyki.txt. Wprowadź dowolny klawisz, aby kontynuować.");
@@ -177,8 +197,8 @@ namespace Wordreader
             int continueProgram = 1;
             int saveLetterCount = new int();
             int saveWordsCount = new int();
-            int savePunctuationsCount = new int();
             int saveSentecesCount = new int();
+            int saveznakiRazem = new int();
 
             while (continueProgram == 1)
             {
@@ -186,7 +206,7 @@ namespace Wordreader
                 Console.WriteLine("1. Pobierz plik z internetu.");
                 Console.WriteLine("2. Zlicz liczbę liter w pobranym pliku.");
                 Console.WriteLine("3. Zlicz liczbę wyrazów w pliku.");
-                Console.WriteLine("4. Zlicz liczbę znaków interpunkcyjnych w pliku.");
+                Console.WriteLine("4. Zlicz liczbę znaków zapytania i kropek.");
                 Console.WriteLine("5. Zlicz liczbę zdań w pliku.");
                 Console.WriteLine("6. Wygeneruj raport o użyciu liter(A - Z).");
                 Console.WriteLine("7. Zapisz statystyki z punktów 2 - 5 do pliku statystyki.txt.");
@@ -207,7 +227,7 @@ namespace Wordreader
                         saveWordsCount = wordsCounter();
                         break;
                     case 4:
-                        savePunctuationsCount = punctuationsCounter();
+                        saveznakiRazem = punctuationsCounter();
                         break;
                     case 5:
                         saveSentecesCount = sentecesCounter();
@@ -216,7 +236,7 @@ namespace Wordreader
                         raportGenerate();
                         break;
                     case 7:
-                        saveAllData(saveLetterCount, saveWordsCount, savePunctuationsCount, saveSentecesCount);
+                        saveAllData(saveLetterCount, saveWordsCount,  saveSentecesCount, saveznakiRazem);
                         break;
                     case 8:
                         continueProgram = 0;
