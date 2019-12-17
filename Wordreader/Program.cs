@@ -60,11 +60,27 @@ namespace Wordreader
                 if (File.Exists(path) == true)
                 {
                     string text = File.ReadAllText(path, Encoding.UTF8);
-                    int count = text.Count(char.IsLetter);
-                    Console.WriteLine("Ilość liter występująca w tekście: " + count);
+                    int countVovel = 0;
+                    int countCons = 0;
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        if (text[i] == 'a' || text[i] == 'e' || text[i] == 'i' || text[i] == 'o' || text[i] == 'u' || text[i] == 'A' || text[i] == 'E' || text[i] == 'I' || text[i] == 'O' || text[i] == 'U')
+                        {
+                            countVovel++;
+                        }
+
+                        else
+                        {
+                            countCons++;
+                        }
+                    }
+                    Console.WriteLine("Ilość samogłosek występująca w tekście: " + countVovel);
+                    Console.WriteLine("Ilość spółgłosek występująca w tekście: " + countCons);
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
-                    return count;
+                    int sumLetter = countVovel + countCons;
+                    return sumLetter;
+
                 }
                 else
                 {
