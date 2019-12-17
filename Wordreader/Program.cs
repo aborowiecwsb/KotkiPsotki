@@ -96,13 +96,29 @@ namespace Wordreader
                 if (File.Exists(words) == true)
                 {
                     var readFile = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "X.txt."));
-                    var wordCount = readFile.Split(new char[] { ' ', ',', '.', ':', ';', '?', '!', '-', '=', '+', '-', '*', '/' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordCount.Length);
+                    int wordSumOneLetter = 0;
+                    int wordSumWithoutBlank = 0;
+                    for (int i = 0; i < readFile.Length; i++)
+                    {
+                        if (readFile[i] == 1)
+                        {
+                            wordSumOneLetter--;
+                        }
+                    }
+                    for (int i = 0; i < readFile.Length; i++)
+                    {
+                        if (readFile[i] == ' ')
+                        {
+                            wordSumWithoutBlank++;
+                        }
+                    }
+                    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordSumWithoutBlank + wordSumOneLetter);
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
                     Console.ReadLine();
-                    return wordCount.Length;
+                    int wordsCount = wordSumOneLetter + wordSumWithoutBlank;
+                    return wordsCount;
                 }
+                else
                 {
                     Console.WriteLine("Plik nie istnieje.");
                     return 0;
