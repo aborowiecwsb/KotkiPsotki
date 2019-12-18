@@ -44,7 +44,7 @@ namespace Wordreader
                         string filePath = Path.Combine(Environment.CurrentDirectory, fileName);
                         FileStream fileOpen = File.OpenRead(filePath);
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         Console.WriteLine("Nie można otworzyć pliku.");
                     }
@@ -130,8 +130,8 @@ namespace Wordreader
                 string punctuation = Path.Combine(Environment.CurrentDirectory, "X.txt.");
                 if (File.Exists(punctuation) == true)
                 {
-                    
-                
+
+
                     string text = File.ReadAllText(punctuation, Encoding.UTF8);
                     int liczbaKropek = 0;
                     int liczbaZnakowZapytania = 0;
@@ -154,8 +154,8 @@ namespace Wordreader
                     Console.ReadLine();
                     int znakiRazem = liczbaKropek + liczbaZnakowZapytania;
                     return znakiRazem;
-                    
-                    
+
+
                 }
                 else
                 {
@@ -170,7 +170,7 @@ namespace Wordreader
                 if (File.Exists(sentence) == true)
                 {
 
-                    var sentenceCount = sentence.Split(new char[] {'.', '?'}, StringSplitOptions.RemoveEmptyEntries);
+                    var sentenceCount = sentence.Split(new char[] { '.', '?' }, StringSplitOptions.RemoveEmptyEntries);
                     var count = sentence.Length;
                     Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
                     Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
@@ -195,46 +195,70 @@ namespace Wordreader
                 {
                     string text = File.ReadAllText(path, Encoding.UTF8).ToString();
 
-                    //char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
                     char[] samogloski = "AEIOUYaeiouy".ToCharArray();
                     char[] spolgloski = "BCDFGHJKLMNPRSTWZbcdfghjklmnprstwz".ToCharArray();
                     int alphabetLength = samogloski.Length - 1;
                     int alphabetLength2 = spolgloski.Length - 1;
                     int i = 0;
                     int j = 0;
-                    while (i <= alphabetLength)
+                    while (i <= alphabetLength2)
                     {
                         int letterCount = 0;
                         foreach (char c in text)
                         {
-                            if (c == samogloski[i])
+                            if (c == spolgloski[i])
                             {
                                 letterCount++;
                             }
                         }
-                        Console.WriteLine("W tekście spolgoska: " + samogloski[i] + " wystepuje: " + letterCount + " razy.");
+                        Console.WriteLine("W tekście spolgoska: " + spolgloski[i] + " wystepuje: " + letterCount + " razy.");
                         i++;
                     }
-                    while (j <= alphabetLength2)
+                    while (j <= alphabetLength)
                     {
                         int letterCount2 = 0;
                         foreach (char c in text)
                         {
-                            if (c == spolgloski[j])
+                            if (c == samogloski[j])
                             {
                                 letterCount2++;
                             }
                         }
-                        Console.WriteLine("W tekście samogloska: " + spolgloski[j] + " wystepuje: " + letterCount2 + " razy.");
+                        Console.WriteLine("W tekście samogloska: " + samogloski[j] + " wystepuje: " + letterCount2 + " razy.");
                         j++;
                     }
-                    Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
-                    Console.ReadLine();
+                    var sentenceCount1 = path.Split(new char[] { '.', '?' }, StringSplitOptions.RemoveEmptyEntries);
+                    var count = path.Length;
+                    Console.WriteLine("Liczba zdań występujących w tekście: " + count.ToString());
+
+                    var readFile = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "X.txt."));
+                    int wordSumOneLetter = 0;
+                    int wordSumWithoutBlank = 0;
+                    for (int k = 0; k < readFile.Length; k++)
+                    {
+                        if (readFile[k] == 1)
+                        {
+                            wordSumOneLetter--;
+                        }
+                    }
+                    for (int k = 0; k < readFile.Length; k++)
+                    {
+                        if (readFile[k] == ' ')
+                        {
+                            wordSumWithoutBlank++;
+                        }
+                    }
+                    Console.WriteLine("Liczba wyrazów występujących w tekście: " + wordSumWithoutBlank + wordSumOneLetter);
+
                 }
                 else
                 {
                     Console.WriteLine("Plik nie istnieje.");
                 }
+                Console.WriteLine("Wprowadź dowolny klawisz, aby kontynuować.");
+                Console.ReadLine();
+            
+                
             }
 
             //case8
@@ -302,7 +326,7 @@ namespace Wordreader
                         raportGenerate();
                         break;
                     case 7:
-                        saveAllData(saveLetterCount, saveWordsCount,  saveSentecesCount, saveznakiRazem);
+                        saveAllData(saveLetterCount, saveWordsCount, saveSentecesCount, saveznakiRazem);
                         break;
                     case 8:
                         continueProgram = 0;
